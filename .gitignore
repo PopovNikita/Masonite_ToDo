@@ -16,3 +16,5 @@ package-lock.json
 
 # compiled assets
 storage/compiled
+/.env
+/script.js

@@ -1,0 +1,23 @@
+# pull official base image
+FROM python:3.11
+
+# set work directory
+WORKDIR /usr/src/app
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV TZ=UTC
+
+# install system dependencies
+RUN apt-get update --fix-missing
+RUN apt-get install apt-utils libsm6 libxext6 vim cron -y
+
+# install dependencies
+RUN pip install --upgrade pip
+RUN pip install gunicorn
+ADD requirements.txt /usr/src/app/
+RUN pip install -r requirements.txt
+
+# Add project from current directory to work directory
+ADD . /usr/src/app/
